@@ -8,7 +8,18 @@ int main()
     vec.push_back(10); // Example usage
     vec.push_back(20);
     vec.push_back(30);
+    for (int val : vec)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
 
+    cout << vec.size() << endl;
+    cout << vec.capacity() << endl;
+    cout << "Front element: " << vec.front() << endl;
+    cout << "Back element: " << vec.back() << endl;
+    vec.pop_back();
+    cout << "After pop_back, back element: " << vec.back() << endl;
     for (int val : vec)
     {
         cout << val << " ";
