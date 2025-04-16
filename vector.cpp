@@ -13,7 +13,6 @@ int main()
         cout << val << " ";
     }
     cout << endl;
-
     cout << vec.size() << endl;
     cout << vec.capacity() << endl;
     cout << "Front element: " << vec.front() << endl;
