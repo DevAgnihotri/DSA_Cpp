@@ -2,7 +2,7 @@
 #include <climits> // Include this for INT_MIN
 using namespace std;
 
-void printsubarray(int arr[], int n) // Accept size as a parameter
+void printsubarray(int arr[], int n)
 {
     for (int start = 0; start < n; start++)
     {
@@ -17,8 +17,9 @@ void printsubarray(int arr[], int n) // Accept size as a parameter
     }
 }
 
-void maxSumSubArray(int arr[], int n) // Accept size as a parameter
+void maxSumSubArray(int arr[], int n)
 {
+    // Brute force approach
     int currentSum = 0;
     int maxSum = INT_MIN;
 
@@ -35,13 +36,30 @@ void maxSumSubArray(int arr[], int n) // Accept size as a parameter
     cout << "max sub array sum: " << maxSum << endl;
 }
 
+void kadanealgo(int arr[], int n)
+{
+    int currentSum = 0;
+    int maxSum = INT_MIN;
+
+    for (int i = 0; i < n; i++)
+    {
+        currentSum += arr[i];
+        maxSum = max(currentSum, maxSum);
+        if (currentSum < 0)
+            currentSum = 0;
+    }
+
+    cout << "Max sub array sub by Kadane's algorithm" << currentSum;
+}
+
 int main()
 {
     int arr[] = {1, 2, 3, 4, 5, 6};
     int n = sizeof(arr) / sizeof(int);
 
-    printsubarray(arr, n);  // Pass size as an argument
-    maxSumSubArray(arr, n); // Pass size as an argument
+    printsubarray(arr, n);
+    maxSumSubArray(arr, n);
+    kadanealgo(arr, n);
 
     return 0;
 }
