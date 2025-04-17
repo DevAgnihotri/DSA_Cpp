@@ -44,17 +44,18 @@ void kadanealgo(int arr[], int n)
     for (int i = 0; i < n; i++)
     {
         currentSum += arr[i];
-        maxSum = max(currentSum, maxSum);
+        maxSum = max(maxSum, currentSum);
         if (currentSum < 0)
             currentSum = 0;
     }
 
-    cout << "Max sub array sub by Kadane's algorithm" << currentSum;
+    cout << "Max sub array sum by Kadane's algorithm: " << maxSum;
 }
 
 int main()
 {
-    int arr[] = {1, 2, 3, 4, 5, 6};
+    // int arr[] = {1, 2, 3, 4, 5, 6};
+    int arr[] = {3, -4, 5, 4, -1, 7, -8};
     int n = sizeof(arr) / sizeof(int);
 
     printsubarray(arr, n);
