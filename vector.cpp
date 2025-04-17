@@ -12,10 +12,17 @@ int LinearSearch(const vector<int> &vec, int val)
     return -1; // case where the value is not found
 }
 
-int rev(const vector<int> &vec)
+void rev(vector<int> &vec)
 {
     int start = 0;
-    int end = vec.size();
+    int end = vec.size() - 1;
+    int temp;
+    while (start < end)
+    {
+        temp = vec[start];
+        vec[start] = vec[end];
+        vec[end] = temp;
+    }
 }
 
 int main()
