@@ -2,6 +2,22 @@
 #include <vector>
 using namespace std; // Add this line to avoid prefixing std::
 
+int LinearSearch(const vector<int> &vec, int val)
+{
+    for (int i = 0; i < vec.size(); i++)
+    {
+        if (val == vec.at(i))
+            return i;
+    }
+    return -1; // case where the value is not found
+}
+
+int rev(const vector<int> &vec)
+{
+    int start = 0;
+    int end = vec.size();
+}
+
 int main()
 {
     vector<int> vec;   // Now `vector` is recognized
