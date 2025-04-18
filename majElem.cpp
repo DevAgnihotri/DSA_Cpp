@@ -72,11 +72,41 @@ int optzApp(vector<int> &nums)
     return ans;
 }
 
+int mooreAlgo(vector<int> &nums)
+{
+    int freq = 0, ans;
+    for (int i = 0; i < nums.size(); i++)
+    {
+
+        if (freq == 0)
+            ans = nums[i];
+
+        if (ans == nums[i])
+            freq++;
+        else
+            freq--;
+    }
+
+    // checker
+    int count = 0;
+    for (int val : nums)
+    {
+        if (val == ans)
+            count++;
+    }
+
+    if (count > nums.size() / 2)
+        return ans;
+    else
+        return -1;
+}
+
 int main()
 {
     vector<int> vec = {1, 2, 2, 1, 1, 1, 2, 2, 2};
 
-    cout << "Brute force approach" << bruteforce(vec) << endl;
-    cout << "Optimised Approach " << optzApp(vec);
+    cout << "Brute force approach: " << bruteforce(vec) << endl;
+    cout << "Optimised Approach: " << optzApp(vec);
+    cout << "\nMoore's Voting Algorithm: " << mooreAlgo(vec) << endl;
     return 0;
 }
