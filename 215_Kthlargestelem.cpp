@@ -21,9 +21,7 @@ public:
         cout << endl;
         int n = distinct_nums.size();
         cout << "Size is -> " << n << endl; // debug
-        int t = k;
-        int p = n - t;
-        return distinct_nums[n - k]; // pick the (n-k)th element
+        return distinct_nums[n - k];        // pick the (n-k)th element
     }
 };
 int main()
