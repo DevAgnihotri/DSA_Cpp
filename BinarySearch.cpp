@@ -10,6 +10,7 @@ int binarySearch(vector<int> &arr, int tar)
 
     while (start <= end)
     {
+        // int mid = (start + end)/2 Causes OVerflow
         int mid = start + (end - start) / 2;
 
         if (arr[mid] < tar)
