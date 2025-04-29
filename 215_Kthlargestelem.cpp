@@ -32,7 +32,6 @@ int main()
     int k = 4;
     cout << "largest kth element to find: " << k << endl;
     int result = solution.findKthLargest(nums, k);
-    // printf("The %dth largest element is %d\n", k, result);
     cout << result;
 
     return 0;
