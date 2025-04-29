@@ -3,14 +3,13 @@
 #include <iostream>
 using namespace std;
 
-int binarySearch(int *arr, int size, int tar)
+int binarySearch(vector<int> &arr, int tar)
 {
     int start = 0;
-    int end = size - 1;
+    int end = arr.size() - 1;
 
     while (start <= end)
     {
-
         int mid = start + (end - start) / 2;
 
         if (arr[mid] < tar)
@@ -27,13 +26,12 @@ int binarySearch(int *arr, int size, int tar)
 
 int main()
 {
-    int arr[] = {2, 4, 6, 8, 10, 12, 14};
-    int size = sizeof(arr) / sizeof(arr[0]);
+    vector<int> arr = {2, 4, 6, 8, 10, 12, 14};
     int target;
     cout << "Enter the target value: ";
     cin >> target;
 
-    int result = binarySearch(arr, size, target);
+    int result = binarySearch(arr, target);
     if (result != -1)
         cout << "Element found at position: " << result << endl;
     else
