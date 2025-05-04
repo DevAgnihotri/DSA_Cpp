@@ -100,19 +100,18 @@ public:
     }
 };
 
-// Main function should be outside the class
-// int main()
-// {
-//     Solution solution;
-//     vector<int> nums = {1, 2, 3, 4};
-//     vector<int> result = solution.productExceptSelf(nums);
+int main()
+{
+    Solution solution;
+    vector<int> nums = {1, 2, 3, 4};
+    vector<int> result = solution.productExceptSelf(nums);
 
-//     for (int num : result)
-//     {
-//         cout << num << " ";
-//     }
-//     cout << endl;
+    for (int num : result)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
 
-//     return 0;
-// }
+    return 0;
+}
 // @lc code=end
