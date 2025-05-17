@@ -752,3 +752,80 @@ struct PolyNode* addPolynomials(struct PolyNode* poly1, struct PolyNode* poly2) 
 - Addition is performed by traversing both lists and combining like terms.
 
 ---
+
+## ✅ Advantages of Doubly Linked List Over Singly Linked List
+
+- **Bidirectional Traversal:**  
+   In a doubly linked list (DLL), each node has pointers to both the next and previous nodes. This allows traversal in both directions (forward and backward), making certain operations more efficient.
+
+- **Easier Deletion:**  
+   Deleting a node in a DLL is simpler and faster because you have direct access to the previous node via the `prev` pointer. In a singly linked list (SLL), you must traverse from the head to find the previous node before deletion.
+
+- **Efficient Insertion/Deletion at Both Ends:**  
+   DLLs allow efficient insertion and deletion at both the beginning and end of the list, especially if you maintain pointers to both head and tail.
+
+- **Useful for Complex Data Structures:**  
+   DLLs are better suited for implementing data structures like navigation systems, undo/redo functionality, and certain types of caches.
+
+---
+
+## ✅ Deleting a Node: Singly vs Doubly Linked List
+
+### 🔹 In Singly Linked List
+
+- Each node has only a `next` pointer.
+- To delete a node (other than the head), you must:
+  1. Traverse the list to find the node **before** the one to delete.
+  2. Change its `next` pointer to skip the node to be deleted.
+  3. Free the memory of the deleted node.
+
+**Example:**
+
+```c
+// Delete node with value 'key' in SLL
+void deleteNode(struct Node** head, int key) {
+        struct Node *temp = *head, *prev = NULL;
+        if (temp != NULL && temp->data == key) {
+                *head = temp->next;
+                free(temp);
+                return;
+        }
+        while (temp != NULL && temp->data != key) {
+                prev = temp;
+                temp = temp->next;
+        }
+        if (temp == NULL) return;
+        prev->next = temp->next;
+        free(temp);
+}
+```
+
+### 🔹 In Doubly Linked List
+
+- Each node has both `next` and `prev` pointers.
+- To delete a node:
+  1. Update the `next` pointer of the previous node (if it exists).
+  2. Update the `prev` pointer of the next node (if it exists).
+  3. Free the memory of the deleted node.
+- No need to traverse from the head to find the previous node.
+
+**Example:**
+
+```c
+// Delete a given node 'del' in DLL
+void deleteNode(struct DNode** head, struct DNode* del) {
+        if (*head == NULL || del == NULL) return;
+        if (*head == del)
+                *head = del->next;
+        if (del->next != NULL)
+                del->next->prev = del->prev;
+        if (del->prev != NULL)
+                del->prev->next = del->next;
+        free(del);
+}
+```
+
+**Summary:**
+
+- DLLs make deletion operations more efficient and straightforward, especially when you have a pointer to the node to be deleted.
+- SLLs require extra traversal to find the previous node, making deletion less efficient.
