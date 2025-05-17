@@ -220,13 +220,14 @@ Suppose you want to calculate the factorial of a number `n` (written as `n!`). T
 
 Notice that `5! = 5 × 4!`, and `4! = 4 × 3!`, and so on. Each step is a smaller version of the same problem.
 
-**How recursion works here:**
+**Recursive Algorithm:**
 
-- To find `5!`, you ask for `4!`
-- To find `4!`, you ask for `3!`
-- This continues until you reach `1!`, which is just `1` (the base case).
+To calculate the factorial recursively:
 
-**Code Example:**
+1. If `n` is 0, return 1 (base case).
+2. Otherwise, return `n * factorial(n - 1)`.
+
+**C Code Example:**
 
 ```c
 int factorial(int n) {
@@ -236,6 +237,12 @@ int factorial(int n) {
         return n * factorial(n - 1); // recursive call
 }
 ```
+
+**Time Complexity Analysis:**
+
+- The function makes one recursive call for each decrement of `n` until it reaches 0.
+- Therefore, for input `n`, there are `n + 1` calls (including the base case).
+- **Time Complexity:** O(n)
 
 **Summary:**  
 Use recursion when a problem can be naturally split into smaller, similar problems, and you can define a clear stopping point.
@@ -310,3 +317,113 @@ For large `n`, this approach is very slow and can crash due to too many recursiv
 Recursion is a powerful tool for solving problems that can be divided into similar subproblems. It makes code cleaner and easier to understand for certain tasks, but should be used carefully to avoid inefficiency and stack overflow. Always ensure there is a clear base case, and consider iterative solutions for performance-critical code.
 
 ---
+
+## Tower of Hanoi
+
+### What is the Tower of Hanoi?
+
+The **Tower of Hanoi** is a classic mathematical puzzle involving three rods (also called pegs) and a number of disks of different sizes. The disks are initially stacked in ascending order of size (largest at the bottom, smallest at the top) on one rod. The goal is to move the entire stack to another rod, following these rules:
+
+1. **Only one disk can be moved at a time.**
+2. **Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack or on an empty rod.**
+3. **No disk may be placed on top of a smaller disk.**
+
+### Problem Setup
+
+- **Number of disks:** 3
+- **Number of rods:** 3 (commonly named A, B, and C)
+
+#### Initial State
+
+All 3 disks are stacked on rod A (source rod), and rods B (auxiliary) and C (destination) are empty.
+
+### Solution for 3 Disks and 3 Rods
+
+Let's name the rods:
+
+- **A:** Source rod
+- **B:** Auxiliary rod
+- **C:** Destination rod
+
+#### Step-by-Step Moves
+
+1. Move Disk 1 from A to C
+2. Move Disk 2 from A to B
+3. Move Disk 1 from C to B
+4. Move Disk 3 from A to C
+5. Move Disk 1 from B to A
+6. Move Disk 2 from B to C
+7. Move Disk 1 from A to C
+
+**Total moves required:** 7 (for 3 disks, the minimum number of moves is 2³ - 1 = 7)
+
+#### Visual Representation
+
+| Move | From | To  |
+| ---- | ---- | --- |
+| 1    | A    | C   |
+| 2    | A    | B   |
+| 3    | C    | B   |
+| 4    | A    | C   |
+| 5    | B    | A   |
+| 6    | B    | C   |
+| 7    | A    | C   |
+
+### Algorithm (Recursive Approach)
+
+The Tower of Hanoi problem is best solved using recursion.
+
+#### Steps
+
+1. Move (n-1) disks from Source to Auxiliary rod.
+2. Move the nth (largest) disk from Source to Destination rod.
+3. Move the (n-1) disks from Auxiliary to Destination rod.
+
+#### Pseudocode
+
+```
+TOH(n, Source, Auxiliary, Destination):
+    if n == 1:
+        print "Move disk 1 from Source to Destination"
+        return
+    TOH(n-1, Source, Destination, Auxiliary)
+    print "Move disk", n, "from Source to Destination"
+    TOH(n-1, Auxiliary, Source, Destination)
+```
+
+#### Example for 3 Disks
+
+Call: `TOH(3, A, B, C)`
+
+- Move 2 disks from A to B (using C)
+- Move disk 3 from A to C
+- Move 2 disks from B to C (using A)
+
+### C Code Example
+
+```c
+#include <stdio.h>
+
+void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+    if (n == 1) {
+        printf("Move disk 1 from %c to %c\n", source, destination);
+        return;
+    }
+    towerOfHanoi(n - 1, source, destination, auxiliary);
+    printf("Move disk %d from %c to %c\n", n, source, destination);
+    towerOfHanoi(n - 1, auxiliary, source, destination);
+}
+
+int main() {
+    int n = 3; // Number of disks
+    towerOfHanoi(n, 'A', 'B', 'C');
+    return 0;
+}
+```
+
+### Summary
+
+- Tower of Hanoi is a puzzle with 3 rods and n disks.
+- Only one disk can be moved at a time, and a larger disk cannot be placed on a smaller one.
+- The minimum number of moves required is (2ⁿ - 1).
+- The problem is solved recursively by moving smaller stacks between rods.

@@ -471,3 +471,86 @@ int main() {
 ```
 
 **Note:** For more efficient priority queues, data structures like heaps are used.
+
+## Implementing a Queue Using Two Stacks
+
+Yes, it is possible to implement a queue using two stacks. The idea is to use two stacks to simulate the First-In-First-Out (FIFO) behavior of a queue.
+
+### Explanation
+
+- **Stack** is a Last-In-First-Out (LIFO) data structure.
+- By using two stacks, we can reverse the order of elements twice, achieving FIFO behavior.
+
+#### Approach
+
+1. **Enqueue Operation:**
+
+   - Push the new element onto the first stack (`stack1`).
+
+2. **Dequeue Operation:**
+   - If the second stack (`stack2`) is empty, pop all elements from `stack1` and push them onto `stack2`.
+   - Pop the top element from `stack2` (this is the front of the queue).
+
+This way, the oldest element is always on top of `stack2` when dequeuing.
+
+### C Implementation Example
+
+```c
+#include <stdio.h>
+#define MAX 100
+
+int stack1[MAX], stack2[MAX];
+int top1 = -1, top2 = -1;
+
+// Push to stack
+void push(int stack[], int *top, int value) {
+     if (*top == MAX - 1) {
+          printf("Stack Overflow\n");
+          return;
+     }
+     stack[++(*top)] = value;
+}
+
+// Pop from stack
+int pop(int stack[], int *top) {
+     if (*top == -1) {
+          printf("Stack Underflow\n");
+          return -1;
+     }
+     return stack[(*top)--];
+}
+
+// Enqueue operation
+void enqueue(int value) {
+     push(stack1, &top1, value);
+}
+
+// Dequeue operation
+int dequeue() {
+     if (top2 == -1) {
+          while (top1 != -1) {
+                int temp = pop(stack1, &top1);
+                push(stack2, &top2, temp);
+          }
+     }
+     return pop(stack2, &top2);
+}
+
+int main() {
+     enqueue(10);
+     enqueue(20);
+     enqueue(30);
+     printf("Dequeued: %d\n", dequeue()); // 10
+     enqueue(40);
+     printf("Dequeued: %d\n", dequeue()); // 20
+     printf("Dequeued: %d\n", dequeue()); // 30
+     printf("Dequeued: %d\n", dequeue()); // 40
+     return 0;
+}
+```
+
+**Summary:**
+
+- Two stacks can be used to implement a queue by reversing the order of elements.
+- Enqueue is always O(1), but dequeue can be O(n) in the worst case.
+- This approach is useful when stack operations are more efficient or required by constraints.
